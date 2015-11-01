@@ -3,13 +3,8 @@ package com.alelak.soundroid;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.squareup.okhttp.HttpUrl;
-import com.squareup.okhttp.Interceptor;
+import com.alelak.soundroid.interceptors.AuthInterceptor;
 import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
-import java.io.IOException;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -26,17 +21,9 @@ public class Soundroid {
      */
     public static void init(@NonNull Context context, @NonNull final String client_id) {
         Soundroid.client_id = client_id;
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.interceptors().add(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                HttpUrl newHttpUrl = request.httpUrl().newBuilder().addQueryParameter("client_id", client_id).build();
-                Request newRequest = request.newBuilder().url(newHttpUrl).addHeader("Accept", "application/json").build();
-                return chain.proceed(newRequest);
-            }
-        });
-        Retrofit retrofit = new Retrofit.Builder()
+        final OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.interceptors().add(new AuthInterceptor(Soundroid.client_id));
+        final Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("https://api.soundcloud.com/")
                 .client(okHttpClient)
@@ -48,8 +35,10 @@ public class Soundroid {
     public static String getClient_id() {
         return client_id;
     }
-    
+
     public static SoundcloudService getSoundcloudService() {
+        if (soundcloudService == null)
+            throw new IllegalStateException("You must initialize Soundroid before calling getSoundcloudService()");
         return soundcloudService;
     }
 }
