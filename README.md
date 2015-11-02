@@ -42,21 +42,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.Alelak:Soundroid:1.0'
+    // ... other dependencies here
+    compile'com.github.Alelak:Soundroid:1.0@aar'
 }
-```
-
-Maven:
-
-```xml
-<repository>
-	 <id>jitpack.io</id>
-	 <url>https://jitpack.io</url>
-</repository>
-
-<dependency>
-	 <groupId>com.github.Alelak</groupId>
-	 <artifactId>Soundroid</artifactId>
-	 <version>1.0</version>
-</dependency>
 ```
