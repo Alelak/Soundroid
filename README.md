@@ -33,3 +33,30 @@ public class App extends Application {
     }
   });
 ```
+## Download
+Gradle:
+
+```gradle
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'com.github.Alelak:Soundroid:1.0'
+}
+```
+
+Maven:
+
+```xml
+<repository>
+	 <id>jitpack.io</id>
+	 <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+	 <groupId>com.github.Alelak</groupId>
+	 <artifactId>Soundroid</artifactId>
+	 <version>1.0</version>
+</dependency>
+```
