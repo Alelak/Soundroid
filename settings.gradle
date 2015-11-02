@@ -1,1 +1,1 @@
-include ':app', ':Soundroid'
+include ':app', ':library'
