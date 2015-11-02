@@ -3,6 +3,8 @@ Soundroid
   
 Unofficial SoundCloud API Wrapper for Android.
 
+<img src="screenshots/screenshot.png" width="400">
+
 ## Initialize
 ```java
 public class App extends Application {
