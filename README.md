@@ -1,6 +1,9 @@
 Soundroid
 =========
-  
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Soundroid-orange.svg?style=flat)](http://android-arsenal.com/details/1/2716)
+[![Release](https://img.shields.io/github/release/Alelak/Soundroid.svg?label=JitPack)](https://jitpack.io/#Alelak/Soundroid)
+
 Unofficial SoundCloud API Wrapper for Android.
 
 <img src="screenshots/screenshot.png" width="400">
