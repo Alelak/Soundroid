@@ -1,11 +1,11 @@
 package com.alelak.soundroid.interceptors;
 
-import com.squareup.okhttp.HttpUrl;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
 import java.io.IOException;
+
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class AuthInterceptor implements Interceptor {
     private final String client_id;
@@ -18,7 +18,7 @@ public class AuthInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        HttpUrl newHttpUrl = request.httpUrl().newBuilder().addQueryParameter("client_id", client_id).build();
+        HttpUrl newHttpUrl = request.url().newBuilder().addQueryParameter("client_id", client_id).build();
         Request newRequest = request.newBuilder().url(newHttpUrl).addHeader("Accept", "application/json").build();
         return chain.proceed(newRequest);
     }

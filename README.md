@@ -2,7 +2,7 @@ Soundroid
 =========
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Soundroid-orange.svg?style=flat)](http://android-arsenal.com/details/1/2716)
-[![Release](https://img.shields.io/github/release/Alelak/Soundroid.svg?label=JitPack)](https://jitpack.io/#Alelak/Soundroid)
+[![Release](https://jitpack.io/v/Alelak/Soundroid.svg)](https://jitpack.io/#Alelak/Soundroid)
 
 Unofficial SoundCloud API Wrapper for Android.
 
@@ -19,11 +19,12 @@ public class App extends Application {
 }
 ```
 ## Example
+
 ```java
   Call<List<Track>> call = Soundroid.getSoundcloudService().searchTracksByGenres("House", 20);
   call.enqueue(new Callback<List<Track>>() {
     @Override
-    public void onResponse(Response<List<Track>> response, Retrofit retrofit) {
+    public void onResponse(Response<List<Track>> response) {
       if (response.isSuccess()) {
         tracks.addAll(response.body());
         songAdapter.notifyDataSetChanged();
@@ -36,6 +37,7 @@ public class App extends Application {
     }
   });
 ```
+
 ## Download
 Gradle:
 
@@ -46,6 +48,6 @@ repositories {
 
 dependencies {
     // ... other dependencies here
-    compile'com.github.Alelak:Soundroid:1.0@aar'
+    compile'com.github.Alelak:Soundroid:1.1'
 }
 ```
