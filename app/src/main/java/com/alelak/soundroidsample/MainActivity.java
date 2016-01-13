@@ -13,10 +13,9 @@ import com.alelak.soundroid.models.Track;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Call<List<Track>> call = Soundroid.getSoundcloudService().searchTracksByGenres("House", 20);
         call.enqueue(new Callback<List<Track>>() {
             @Override
-            public void onResponse(Response<List<Track>> response, Retrofit retrofit) {
+            public void onResponse(Response<List<Track>> response) {
                 swipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccess()) {
                     tracks.clear();
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                     songAdapter.notifyDataSetChanged();
 
                 }
-
             }
 
             @Override

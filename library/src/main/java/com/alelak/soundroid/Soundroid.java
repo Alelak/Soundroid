@@ -1,17 +1,19 @@
 package com.alelak.soundroid;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.alelak.soundroid.interceptors.AuthInterceptor;
-import com.squareup.okhttp.OkHttpClient;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+
+import retrofit2.GsonConverterFactory;
+import retrofit2.Retrofit;
 
 public class Soundroid {
+    private static final String ENDPOINT = "https://api.soundcloud.com/";
     private static SoundcloudService soundcloudService;
     private static String client_id;
+
 
     /**
      * Initialize Soundroid
@@ -19,13 +21,20 @@ public class Soundroid {
      * @param context   Application context.
      * @param client_id Soundcloud client id.
      */
-    public static void init(@NonNull Context context, @NonNull final String client_id) {
+    public static void init(Context context, final String client_id) {
+        if (context == null)
+            throw new IllegalArgumentException("context cannot be null");
+        if (client_id == null)
+            throw new IllegalArgumentException("client_id cannot be null");
+
         Soundroid.client_id = client_id;
-        final OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.interceptors().add(new AuthInterceptor(Soundroid.client_id));
+        final OkHttpClient okHttpClient = new OkHttpClient
+                .Builder()
+                .addInterceptor(new AuthInterceptor(Soundroid.client_id))
+                .build();
         final Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://api.soundcloud.com/")
+                .baseUrl(ENDPOINT)
                 .client(okHttpClient)
                 .build();
 
